@@ -7,10 +7,19 @@ elastic net"Fitting the Lasso Estimator using R" by Hui Zou and Trevor Hastie
 J. R. Statist. Soc. B (2005) 67 , Part 2 , pp. 301–320
 
 R code author - B. Waidyawansa
-Date - 04-30-2018
+Date - 10-10-2018
 
 Usage :
  Rscript BEDROCK-ELASTICNET_LARS.R <location/data_file_name.csv>
+
+To run the program from inside of the script directory:- 
+via R commandline do:
+       	    Rscript BEDROCK-ELASTICNET-LARS.R data_file_name.csv
+via RStudio do:
+       Set the working directory to the folder with the script.
+       In the consoled do:
+       	  > system("Rscript BEDROCK-ELASTICNET-LARS.R data_file_name.csv")
+
 
 NOTE - No data per-processing done inside this script. All provided
 data files are assumed to be CLEAN and in a clear format with the first

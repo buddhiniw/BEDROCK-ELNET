@@ -7,7 +7,7 @@
 #  J. R. Statist. Soc. B (2005) 67 , Part 2 , pp. 301–320
 # 
 #  
-#  R script author - B. Waidyawansa (04/30/2018)
+#  R script author - B. Waidyawansa (10/10/2018)
 #############################
 
 
@@ -17,25 +17,28 @@ library(glmnet) # Package to fit ridge/lasso/elastic net models
 library(DMwR)
 library(boot) # Package to do bootstrap error estimates
 library(elasticnet)
-
+library(rstudioapi)
 # Clean up the directory
 rm(list=ls())
 
-# Get file name from command line arguments if run as script from command line or PHP
+# Get file name from command line arguments if run as script from command line
 args <- commandArgs(TRUE)
 
 # Test if the input file name is given: if not, return an error
 if (length(args)==0) {
-  stop("Correct Usage: Rscript BEDROCK-ELASTICNET_LARS.R <location/data_file_name.csv>", call.=FALSE)
+  stop("Correct Usage: Rscript BEDROCK-ELASTICNET_LARS.R <data_file_name.csv>", call.=FALSE)
 }
 
 
+# Get the script directory
+working.dir <- getwd()
+
 # Get the input data file name
-inFileName = paste0("data/",args[1])
+inFileName <- paste0(working.dir,"/data/",args[1])
 cat("Reading data from - ",inFileName)
 
 # Read the data from a .dat file, print the data to be sure that itwas read in correctly
-dataIn <- read.csv(inFileName, header=T)
+dataIn <- read.csv(inFileName, header=T) 
   
 ###################################################################
 # Standardize the predictor(x) variables and response(y) variable
@@ -168,5 +171,8 @@ y.hat.enet.unscaled <- unscale(y.hat.enet.scaled$fit,dataIn.y.scaled)
 
 
 #########################################
-source("BEDROCK-HELP-FUNC.R")
-source("BEDROCK-DOC.R")
+
+
+source(file.path(working.dir, "BEDROCK-HELP-FUNC.R"))
+source(file.path(working.dir, "BEDROCK-DOC.R"))
+
